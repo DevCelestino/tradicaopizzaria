@@ -1,6 +1,6 @@
 import { compare } from "bcryptjs"
-import prismaClient from "../../prisma"
 import { sign } from "jsonwebtoken"
+import prismaClient from "../../prisma"
 
 interface AuthRequest {
   username: string
@@ -9,7 +9,7 @@ interface AuthRequest {
 
 class AuthUserService {
   async execute({ username, password }: AuthRequest) {
-    //Initial validation if there is a user using the username or email informed
+    //Initial validation if there is a user registered using the username or email informed
     const user = await prismaClient.user.findFirst({
       where: {
         OR: [
