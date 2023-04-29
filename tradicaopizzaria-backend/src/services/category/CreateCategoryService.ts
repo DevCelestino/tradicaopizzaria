@@ -7,9 +7,7 @@ interface CategoryRequest {
 class CreateCategoryService {
   async execute({ name }: CategoryRequest) {
     //Initial blank prop validation
-    if (name === "") {
-      throw new Error("Name invalid")
-    }
+    if (!name) throw new Error("Name invalid")
 
     //Validates if there is already a category with the informed name registered
     const existentCategory = await prismaClient.category.findFirst({
@@ -17,9 +15,7 @@ class CreateCategoryService {
         name: name
       }
     })
-    if (existentCategory) {
-      throw new Error("There is already a category with this name registered")
-    }
+    if (existentCategory) throw new Error("There is already a category with this name registered")
 
     //Creates the new category in the database
     const category = await prismaClient.category.create({

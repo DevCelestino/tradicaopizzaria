@@ -18,15 +18,11 @@ class AuthUserService {
         ]
       }
     })
-    if (!user) {
-      throw new Error("Username/password incorrect")
-    }
+    if (!user) throw new Error("Username/password incorrect")
 
     //Validation if the password informed matches with the one on the database
     const passwordMatch = await compare(password, user.password)
-    if (!passwordMatch) {
-      throw new Error("Username/password incorrect")
-    }
+    if (!passwordMatch) throw new Error("Username/password incorrect")
 
     //If everything is correct, generates the session token for the user
     const token = sign(

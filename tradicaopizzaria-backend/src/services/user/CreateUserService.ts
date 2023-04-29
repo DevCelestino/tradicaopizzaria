@@ -11,15 +11,9 @@ interface UserRequest {
 class CreateUserService {
   async execute({ name, email, username, password }: UserRequest) {
     //Initial null props validations
-    if (!email) {
-      throw new Error("Invalid email")
-    }
-    if (!username) {
-      throw new Error("Invalid username")
-    }
-    if (!password) {
-      throw new Error("Invalid password")
-    }
+    if (!email) throw new Error("Invalid email")
+    if (!username) throw new Error("Invalid username")
+    if (!password) throw new Error("Invalid password")
 
     //Already in use email or username validation
     const userAlreadyExists = await prismaClient.user.findFirst({
@@ -30,9 +24,7 @@ class CreateUserService {
         ]
       }
     })
-    if (userAlreadyExists) {
-      throw new Error("Email/username already in use")
-    }
+    if (userAlreadyExists) throw new Error("Email/username already in use")
 
     //User insert on table users
     const passwordHash = await hash(password, 3.6)
