@@ -1,11 +1,7 @@
 import prismaClient from "../../prisma"
 
-interface OrderItemRequest {
-  orderItem_id: string
-}
-
 class RemoveOrderItemService {
-  async execute({ orderItem_id }: OrderItemRequest) {
+  async execute(orderItem_id: string) {
     //Deletes the order
     const orderItem = await prismaClient.orderItem.delete({
       where: {

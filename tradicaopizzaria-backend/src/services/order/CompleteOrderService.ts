@@ -1,18 +1,18 @@
 import prismaClient from "../../prisma"
 
-class UndraftOrderService {
+class CompleteOrderService {
   async execute(order_id: string) {
-    //Updates the draft order status to false
+    //Updates the order status to complete
     const order = await prismaClient.order.update({
       where: {
         id: order_id
       },
       data: {
-        draft: false
+        status: true
       },
       select: {
         id: true,
-        draft: true
+        status: true
       }
     })
 
@@ -20,4 +20,4 @@ class UndraftOrderService {
   }
 }
 
-export { UndraftOrderService }
+export { CompleteOrderService }

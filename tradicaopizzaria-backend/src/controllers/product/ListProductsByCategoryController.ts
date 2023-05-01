@@ -3,7 +3,7 @@ import { ListProductsByCategoryService } from "../../services/product/ListProduc
 
 class ListProductsByCategoryController {
   async handle(req: Request, res: Response) {
-    const { category_id } = req.body
+    const category_id = req.body.category_id as string
     const listProductsByCategoryService = new ListProductsByCategoryService()
     const products = await listProductsByCategoryService.execute(category_id)
 

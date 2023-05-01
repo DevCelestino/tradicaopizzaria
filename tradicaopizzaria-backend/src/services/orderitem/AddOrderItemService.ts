@@ -8,7 +8,7 @@ interface OrderItemRequest {
 
 class AddOrderItemService {
   async execute({ order_id, product_id, quantity }: OrderItemRequest) {
-    //Creates a new order
+    //Adds a new item to an order
     const orderItem = await prismaClient.orderItem.create({
       data: {
         order_id: order_id,

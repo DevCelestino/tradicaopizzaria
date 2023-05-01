@@ -1,11 +1,7 @@
 import prismaClient from "../../prisma"
 
-interface CategoryRequest {
-  name: string
-}
-
 class CreateCategoryService {
-  async execute({ name }: CategoryRequest) {
+  async execute(name: string) {
     //Initial blank prop validation
     if (!name) throw new Error("Name invalid")
 
