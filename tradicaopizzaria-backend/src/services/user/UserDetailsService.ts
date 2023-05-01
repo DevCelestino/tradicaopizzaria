@@ -3,7 +3,7 @@ import prismaClient from "../../prisma"
 class UserDetailsService {
   async execute(user_id: string) {
     //Returns the user informations
-    const user = await prismaClient.user.findFirst({
+    const userDetails = await prismaClient.user.findFirst({
       where: {
         id: user_id
       },
@@ -14,7 +14,7 @@ class UserDetailsService {
         email: true
       }
     })
-    return user
+    return userDetails
   }
 }
 

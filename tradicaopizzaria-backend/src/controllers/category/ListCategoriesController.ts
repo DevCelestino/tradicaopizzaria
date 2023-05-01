@@ -4,9 +4,9 @@ import { ListCategoriesService } from "../../services/category/ListCategoriesSer
 class ListCategoriesController {
   async handle(req: Request, res: Response) {
     const listCategoriesService = new ListCategoriesService()
-    const category = await listCategoriesService.execute()
+    const categories = await listCategoriesService.execute()
 
-    return res.json(category)
+    return res.json(categories)
   }
 }
 
