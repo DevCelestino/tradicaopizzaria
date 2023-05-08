@@ -1,14 +1,47 @@
 import Head from "next/head"
 import Image from "next/image"
 import Link from "next/link"
+import { useContext, useState, FormEvent } from "react"
+import { toast } from "react-toastify"
+
 import { Input } from "@/components/Input"
 import { Button } from "@/components/Button"
 
-import styles from "../styles/home.module.scss"
+import { AuthContext } from "../contexts/AuthContext"
+
+import { canSSRGuest } from "@/utils/canSSRGuest"
 
 import logoImg from "../../public/logo.svg"
 
+import styles from "../styles/home.module.scss"
+
 export default function Home() {
+  const { signIn } = useContext(AuthContext)
+
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
+
+  async function handleSignIn(event: FormEvent) {
+    event.preventDefault()
+
+    if (username === "" || password === "") {
+      if (!username) toast.warning("Please enter your username")
+      else if (!password) toast.warning("Please enter your password")
+      return
+    }
+
+    setLoading(true)
+
+    let data = {
+      logInUsername: username,
+      logInPassword: password
+    }
+
+    await signIn(data)
+    setLoading(false)
+  }
+
   return (
     <>
       <Head>
@@ -20,18 +53,23 @@ export default function Home() {
           alt="Logo da Pizzaria"
         />
         <div className={styles.login}>
-          <form>
+          <h1>Log in to your account</h1>
+          <form onSubmit={handleSignIn}>
             <Input
               placeholder="Enter your username"
               type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
             <Input
               placeholder="Enter your password"
               type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <Button
               type="submit"
-              loading={false}
+              loading={loading}
             >
               Log in
             </Button>
@@ -47,3 +85,9 @@ export default function Home() {
     </>
   )
 }
+
+export const getServerSideProps = canSSRGuest(async (ctx) => {
+  return {
+    props: {}
+  }
+})

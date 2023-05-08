@@ -5,9 +5,8 @@
   padding: 0.4rem;
   color: var(--white);
   border-radius: 0.5rem;
-  transition: filter 0.2s;
+  transition: all 0.2s;
   transition: transform 0.6s;
-  transition: box-shadow 0.8s;
 
   &[disabled] {
     cursor: not-allowed;
@@ -16,7 +15,8 @@
     }
   }
 
-  &:hover {
+  &:hover,
+  &:focus {
     filter: brightness(1.08);
     transform: scale(1.06);
     box-shadow: 5px 5px 10px black;

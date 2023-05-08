@@ -1,0 +1,78 @@
+.header {
+  background-color: var(--darker-background);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(250, 250, 250, 0.3);
+  padding: 0.5rem 1.5rem;
+  height: auto;
+
+  >a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &:hover img {
+      animation: jump .2s linear;
+    }
+  }
+
+  nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2.5rem;
+    color: var(--white);
+    height: 60px;
+
+    a {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      transition: all .2s;
+
+      &:hover {
+        animation: jump .2s linear;
+        color: var(--red);
+      }
+    }
+
+    button {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      background: transparent;
+      border: 0;
+      color: var(--white);
+      
+      svg {
+        transition: all .2s;
+      }
+
+      &:hover svg {
+        animation: jump .2s linear;
+        color: var(--red);
+      }
+    }
+  }
+}
+
+@keyframes jump {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}

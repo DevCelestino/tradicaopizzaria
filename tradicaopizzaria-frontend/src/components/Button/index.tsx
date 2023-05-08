@@ -12,7 +12,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export function Button({ loading, children, ...rest }: ButtonProps) {
   return (
     <button className={styles.button} disabled={loading} {...rest}>
-      {loading? (
+      {loading ? (
         <FaSpinner color="var(--white)" size={16} />
       ) : (
         <a className={styles.buttonLabel}>{children}</a>
